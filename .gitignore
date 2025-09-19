@@ -1,0 +1,20 @@
+# Environment and secrets
+.env
+
+# Runtime data
+data/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Media and archives (store via Releases or LFS)
+*.mp4
+*.gif
+*.tar.gz
+*.zip
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
