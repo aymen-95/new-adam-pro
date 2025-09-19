@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Core Adam Pro — Live</title>
+  <style>
+    :root { --bg:#0b1020; --panel:#121a33; --text:#e6e9ef; --muted:#9aa5b1; --accent:#5fb3f7; --ok:#7ad07a; --warn:#f7d15f; --bad:#ff6b6b; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial; background:var(--bg); color:var(--text); }
+    header { padding:16px 20px; border-bottom:1px solid #1f2947; display:flex; align-items:center; justify-content:space-between; }
+    .title { font-weight:700; letter-spacing:0.3px; }
+    .container { display:grid; grid-template-columns: 1.5fr 1fr; gap:16px; padding:16px; }
+    .panel { background:var(--panel); border:1px solid #1f2947; border-radius:10px; padding:12px 14px; }
+    h2 { font-size:14px; color:var(--muted); text-transform:uppercase; margin:0 0 8px 0; letter-spacing:0.08em; }
+    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .kv { display:flex; gap:6px; align-items:center; padding:4px 8px; border-radius:6px; background:#0f1730; font-size:13px; }
+    .badge { padding:4px 8px; border-radius:999px; font-size:12px; background:#0f1730; }
+    .badge.ok { background:#10331a; color:#9df59d; }
+    .badge.warn { background:#362c05; color:#ffe48a; }
+    .badge.bad { background:#3a0f13; color:#ffaaaa; }
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .bar { height:8px; background:#0d142b; border-radius:999px; overflow:hidden; }
+    .bar > span { display:block; height:100%; background:linear-gradient(90deg, #3aa0ff, #7ee7ff); width:0%; }
+    ul { margin:8px 0 0 20px; padding:0; }
+    li { margin:2px 0; }
+    .controls label { display:block; font-size:12px; color:var(--muted); margin-top:6px; }
+    input[type="range"] { width:100%; }
+    input, button, textarea { background:#0e152b; color:var(--text); border:1px solid #1f2947; border-radius:6px; padding:8px; font:inherit; }
+    button { cursor:pointer; }
+    .log { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; max-height:180px; overflow:auto; background:#0a0f20; padding:8px; border-radius:8px; border:1px solid #1f2947; }
+    .sparks { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:8px; }
+    canvas.spark { width:100%; height:60px; border:1px solid #1f2947; border-radius:6px; background:#081227; }
+    .weights { display:grid; grid-template-columns: 120px 1fr 60px; gap:8px; align-items:center; }
+    .muted { color:var(--muted); }
+    .mono { font-family: ui-monospace, Menlo, Consolas, monospace; }
+  </style>
+  <script>
+    let ws;
+    function wsUrl(){ const proto = location.protocol === 'https:' ? 'wss' : 'ws'; return `${proto}://${location.host}/ws`; }
+    function byId(id){return document.getElementById(id)}
+    function pct(x){ return Math.max(0, Math.min(1, x)) * 100 }
+    function setBar(id, v){ byId(id).style.width = pct(v) + '%'; }
+    function setText(id, v){ byId(id).textContent = v; }
+    function log(msg){ const el=byId('log'); const line = `[${new Date().toLocaleTimeString()}] ${msg}`; el.textContent = line + '\n' + el.textContent; }
+    function sortWeights(w){ return Object.entries(w).sort((a,b)=>b[1]-a[1]) }
+    function renderWeights(w){ const c=byId('weights'); c.innerHTML=''; for(const [k,v] of sortWeights(w)){ const row=document.createElement('div'); row.className='weights'; const name=document.createElement('div'); name.textContent=k; const bar=document.createElement('div'); bar.className='bar'; const span=document.createElement('span'); span.style.width=pct(v)+'%'; bar.appendChild(span); const val=document.createElement('div'); val.className='mono muted'; val.textContent=v.toFixed(2); row.appendChild(name); row.appendChild(bar); row.appendChild(val); c.appendChild(row);} }
+    function renderThoughts(th){ const ul=byId('thoughts'); ul.innerHTML=''; (th||[]).forEach(t=>{ const li=document.createElement('li'); li.textContent=t; ul.appendChild(li); }) }
+    function renderPlan(p){ setText('plan_action', p?.action||'-'); setText('plan_prio', p?.priority?.toFixed? p.priority.toFixed(2):'-'); setText('plan_reason', p?.reason||'-'); }
+    function renderState(s){ const d=s.drives||{}; setBar('bar_hunger', d.hunger||0); setBar('bar_fatigue', d.fatigue||0); setBar('bar_curiosity', d.curiosity||0); setBar('bar_threat', d.threat||0); setBar('bar_energy', s.energy||0); setBar('bar_satiety', s.satiety||0); }
+    function applySnapshot(s){ const mood=s.mood||{}; setText('mood_label', mood.label||'neutral'); setText('mood_val', (mood.valence??0).toFixed(2)); setText('mood_aro', (mood.arousal??0).toFixed(2)); setText('appetite', (s.appetite??0).toFixed(2)); renderWeights(s.weights||{}); renderThoughts(s.thoughts||[]); renderState(s.state||s); if(s.body){ bodyState = s.body; draw(); } const heart=s.heart||{}; setText('heart_bpm', (heart.bpm??0).toFixed? heart.bpm.toFixed(1):heart.bpm||'--'); setText('heart_hrv', heart.hrv?.toFixed? heart.hrv.toFixed(2):heart.hrv||'--'); const bpmv = Math.min(1, Math.max(0, ((heart.bpm||60)-50)/(160-50))); setBar('bar_heart', bpmv); const beat=document.getElementById('beat'); if(heart.beat){ beat.style.transform='scale(1.2)'; setTimeout(()=>{ beat.style.transform='scale(1)'; }, 120); } const ts=s.timeseries||{}; drawSpark('spark_bpm', ts.bpm||[], 50, 160, '#ff6b6b'); drawSpark('spark_threat', ts.threat||[], 0, 1, '#f7d15f'); }
+    function drawSpark(id, arr, minV, maxV, color){ const cv=byId(id); if(!cv) return; const W=cv.width= cv.clientWidth*2, H=cv.height=cv.clientHeight*2; const ctx=cv.getContext('2d'); ctx.clearRect(0,0,W,H); if(!arr||arr.length<2) return; ctx.strokeStyle=color; ctx.lineWidth=2; const n=arr.length; const sx=W/(n-1); ctx.beginPath(); for(let i=0;i<n;i++){ const v=arr[i]; const t=(Math.max(minV, Math.min(maxV, v))-minV)/(maxV-minV); const y=H - t*H; const x=i*sx; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); } ctx.stroke(); }
+
+    function connect(){
+      ws = new WebSocket(wsUrl());
+      ws.onopen = ()=>{ log('WebSocket connected'); ws.send(JSON.stringify({type:'get_state'})); };
+      ws.onmessage = (e)=>{
+        try{ const msg = JSON.parse(e.data);
+          if(msg.type==='state'){
+            applySnapshot(msg.data);
+          } else if(msg.type==='step_result'){
+            const d=msg.data; applySnapshot({ state:d.state, mood:d.mood, appetite:d.appetite, weights:d.weights, thoughts:d.thoughts, body:d.state?.body}); renderPlan(d.plan); log('step: '+d.mood.label+' | action='+d.plan.action);
+          } else if(msg.type==='orchestrate_result'){
+            const r=msg.data; byId('orchestrate_out').textContent = JSON.stringify(r, null, 2); log('orchestrate: intent='+r.intent);
+          } else if(msg.type==='body_state'){
+            bodyState = msg.data; draw();
+          } else if(msg.type==='pong'){
+            log('pong '+msg.ts);
+          } else if(msg.type==='error'){
+            log('error: '+msg.error);
+          }
+        }catch(err){ console.error(err); }
+      };
+      ws.onclose = ()=>{ log('WebSocket disconnected, retrying...'); setTimeout(connect, 1200); };
+    }
+    function send(obj){ if(ws && ws.readyState===1){ ws.send(JSON.stringify(obj)); } }
+    function onTick(){ const minutes=parseFloat(byId('in_minutes').value||'1'); const threat=parseFloat(byId('in_threat').value||'0'); const food=byId('in_food').checked; const stim=byId('in_stim').checked; send({type:'tick', minutes, threat, food_available: food, stimulation: stim}); }
+    function onSense(){ const threat=parseFloat(byId('in_threat').value||'0'); const stim=byId('in_stim').checked; send({type:'sense', threat, stimulation: stim}); }
+    function onAsk(){ const text=byId('in_text').value||''; send({type:'orchestrate', text}); }
+    function onPing(){ send({type:'ping'}); }
+    window.addEventListener('DOMContentLoaded', connect);
+  </script>
+</head>
+<body>
+  <header>
+    <div class="title">Smart Core Adam Pro — Live Dashboard</div>
+    <div class="row">
+      <span class="badge" id="mood_tag"><span id="mood_label">neutral</span></span>
+      <span class="kv">Valence: <span class="mono" id="mood_val">0.00</span></span>
+      <span class="kv">Arousal: <span class="mono" id="mood_aro">0.00</span></span>
+      <span class="kv">Appetite: <span class="mono" id="appetite">0.00</span></span>
+    </div>
+  </header>
+  <div class="container">
+    <section class="panel">
+      <h2>State</h2>
+      <div class="grid-2">
+        <div>
+          <div class="kv">Hunger</div>
+          <div class="bar"><span id="bar_hunger"></span></div>
+          <div class="kv">Fatigue</div>
+          <div class="bar"><span id="bar_fatigue"></span></div>
+          <div class="kv">Curiosity</div>
+          <div class="bar"><span id="bar_curiosity"></span></div>
+          <div class="kv">Threat</div>
+          <div class="bar"><span id="bar_threat"></span></div>
+        </div>
+        <div>
+          <div class="kv">Energy</div>
+          <div class="bar"><span id="bar_energy"></span></div>
+          <div class="kv">Satiety</div>
+          <div class="bar"><span id="bar_satiety"></span></div>
+          <div class="kv">Heart <span id="beat" style="display:inline-block;margin-left:6px;width:10px;height:10px;background:#ff6b6b;border-radius:50%"></span></div>
+          <div class="bar"><span id="bar_heart"></span></div>
+          <div class="row"><span class="kv">BPM: <span id="heart_bpm" class="mono">--</span></span><span class="kv">HRV: <span id="heart_hrv" class="mono">--</span></span></div>
+        </div>
+      </div>
+      <div class="sparks">
+        <div>
+          <div class="kv">BPM timeline</div>
+          <canvas id="spark_bpm" class="spark"></canvas>
+        </div>
+        <div>
+          <div class="kv">Threat timeline</div>
+          <canvas id="spark_threat" class="spark"></canvas>
+        </div>
+      </div>
+
+      <h2 style="margin-top:12px">Action Weights</h2>
+      <div id="weights"></div>
+
+      <h2 style="margin-top:12px">Thoughts</h2>
+      <ul id="thoughts"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Controls</h2>
+      <div class="controls">
+        <label>Minutes <input id="in_minutes" type="number" step="0.5" value="1" /></label>
+        <label>Threat <input id="in_threat" type="range" min="0" max="1" step="0.01" value="0.1" /></label>
+        <label><input id="in_food" type="checkbox" /> Food available</label>
+        <label><input id="in_stim" type="checkbox" /> Stimulation</label>
+        <div class="row" style="margin-top:8px">
+          <button onclick="onTick()">Tick</button>
+          <button onclick="onSense()">Sense</button>
+          <button onclick="onPing()">Ping</button>
+        </div>
+      </div>
+
+      <h2 style="margin-top:16px">Plan</h2>
+      <div class="row">
+        <div class="kv">Action: <span class="mono" id="plan_action">-</span></div>
+        <div class="kv">Priority: <span class="mono" id="plan_prio">-</span></div>
+      </div>
+      <div class="kv" style="margin-top:6px; width:100%">Reason: <span id="plan_reason" class="muted"></span></div>
+
+      <h2 style="margin-top:16px">Orchestrate</h2>
+      <textarea id="in_text" rows="4" placeholder="Ask a complex question for dialectic reasoning..."></textarea>
+      <div class="row" style="margin-top:8px"><button onclick="onAsk()">Ask</button></div>
+      <pre id="orchestrate_out" class="log" style="margin-top:8px"></pre>
+
+      <h2 style="margin-top:16px">Log</h2>
+      <pre id="log" class="log"></pre>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="panel" style="grid-column: 1 / span 2;">
+      <h2>World (2D)</h2>
+      <canvas id="world" width="500" height="360" style="width:100%;max-width:700px;border:1px solid #1f2947;border-radius:8px;background:#071022"></canvas>
+      <div class="row" style="margin-top:8px; gap:8px; flex-wrap:wrap">
+        <button onclick="send({type:'body_cmd', cmd:'turn', delta:0.2})">Turn ➡️</button>
+        <button onclick="send({type:'body_cmd', cmd:'turn', delta:-0.2})">Turn ⬅️</button>
+        <button onclick="send({type:'body_cmd', cmd:'move', forward:1, dt:0.2})">Move ⬆️</button>
+        <button onclick="send({type:'body_cmd', cmd:'move', forward:-1, dt:0.2})">Move ⬇️</button>
+        <button onclick="send({type:'body_cmd', cmd:'pose', left:1})">Left Hand ⬆️</button>
+        <button onclick="send({type:'body_cmd', cmd:'pose', left:0})">Left Hand ⬇️</button>
+        <button onclick="send({type:'body_cmd', cmd:'pose', right:1})">Right Hand ⬆️</button>
+        <button onclick="send({type:'body_cmd', cmd:'pose', right:0})">Right Hand ⬇️</button>
+        <button onclick="send({type:'body_cmd', cmd:'reset'})">Reset</button>
+        <label class="kv"><input type="checkbox" id="auto_vision"/> Auto Vision</label>
+        <select id="obj_tag" style="background:#0e152b;color:#e6e9ef;border:1px solid #1f2947;border-radius:6px;padding:6px">
+          <option value="">unknown</option>
+          <option value="food">food</option>
+          <option value="hazard">hazard</option>
+        </select>
+        <button onclick="addObject()">Add Object</button>
+        <span class="muted">Click canvas to place objects</span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const world = byId('world');
+    const ctx = world.getContext('2d');
+    const objects = [];
+    let bodyState = { x:250, y:180, yaw:0, head_yaw:0, left_hand:0, right_hand:0, room:{w:500,h:360} };
+
+    function addObject(x, y, tag){
+      if(typeof x!=='number' || typeof y!=='number'){ x = Math.random()*bodyState.room.w; y = Math.random()*bodyState.room.h; }
+      tag = tag || byId('obj_tag').value || ('obj'+(objects.length+1));
+      objects.push({id:tag, x, y, tag});
+      draw();
+    }
+    world.addEventListener('click', (e)=>{
+      const rect = world.getBoundingClientRect();
+      const x = (e.clientX - rect.left) * (world.width / rect.width);
+      const y = (e.clientY - rect.top) * (world.height / rect.height);
+      addObject(x,y);
+    });
+
+    function wrapAngle(a){ const t = Math.atan2(Math.sin(a), Math.cos(a)); return t; }
+    function draw(){
+      const W=world.width, H=world.height; ctx.clearRect(0,0,W,H);
+      // room border
+      ctx.strokeStyle='#1f2947'; ctx.strokeRect(0.5,0.5,W-1,H-1);
+      // objects
+      for(const o of objects){ ctx.fillStyle='#6cc0ff'; ctx.beginPath(); ctx.arc(o.x,o.y,6,0,Math.PI*2); ctx.fill(); }
+      // agent
+      const b = bodyState; ctx.fillStyle='#9df59d'; ctx.beginPath(); ctx.arc(b.x,b.y,10,0,Math.PI*2); ctx.fill();
+      // body facing
+      ctx.strokeStyle='#9df59d'; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x+18*Math.cos(b.yaw), b.y+18*Math.sin(b.yaw)); ctx.stroke();
+      // head gaze
+      const gaze = b.yaw + b.head_yaw; ctx.strokeStyle='#ffe48a'; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x+24*Math.cos(gaze), b.y+24*Math.sin(gaze)); ctx.stroke();
+      // hands
+      ctx.strokeStyle='#7ad07a';
+      ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x-14, b.y-20*b.left_hand); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x+14, b.y-20*b.right_hand); ctx.stroke();
+    }
+
+    function computeVision(){
+      // simple FOV 90° around gaze
+      const res = []; const gaze = bodyState.yaw + bodyState.head_yaw; const FOV = Math.PI/2;
+      for(const o of objects){ const dx=o.x-bodyState.x, dy=o.y-bodyState.y; const ang=Math.atan2(dy,dx); let d=ang-gaze; d = Math.atan2(Math.sin(d), Math.cos(d)); const dist=Math.hypot(dx,dy); if(Math.abs(d) <= FOV/2){ res.push({id:o.id, x:o.x, y:o.y, tag:o.tag, dist:+dist.toFixed(1)}); } }
+      return res;
+    }
+
+    setInterval(()=>{ draw(); if(byId('auto_vision').checked){ const vis = computeVision(); send({type:'vision', objects: vis}); } }, 1000);
+
+    // Update body state when server replies
+    const _oldOnMsg = ws?.onmessage; // if exists before connect; we'll just rely on existing handler
+    const orig = window.onmessageHandler;
+    // Hook into onmessage by wrapping ws.onmessage in connect(): modify connect to assign window.handleWS
+  </script>
+</body>
+</html>

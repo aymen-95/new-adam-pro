@@ -1,0 +1,620 @@
+[
+  {
+    "id": "ab280440-8893-4816-a3d8-2f241fc63baf",
+    "timestamp": "2025-09-19T07:30:52.379636Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "",
+        "source": "ws",
+        "timestamp": 1758267052,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: ",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: ",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: ",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: ",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "457c05f9-025d-49d4-a2c4-ab4d3c98c42a",
+    "timestamp": "2025-09-19T07:35:05.785391Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "who i am ",
+        "source": "ws",
+        "timestamp": 1758267305,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: who i am ",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: who i am ",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: who i am ",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: who i am ",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: who i am ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "ebbe60e9-9b0e-4586-8579-8f9eb3427b15",
+    "timestamp": "2025-09-19T07:37:47.123341Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "",
+        "source": "ws",
+        "timestamp": 1758267467,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: ",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: ",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: ",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: ",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "911b9b78-3661-486a-89e1-c2ef88b7f1d3",
+    "timestamp": "2025-09-19T07:38:47.422775Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "1",
+        "source": "ws",
+        "timestamp": 1758267527,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: 1",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: 1",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: 1",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: 1",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: 1",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "ecfd159f-fde7-4575-bc9b-f320d5854f8f",
+    "timestamp": "2025-09-19T07:41:13.698477Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "where are i now ",
+        "source": "ws",
+        "timestamp": 1758267673,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: where are i now ",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: where are i now ",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: where are i now ",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: where are i now ",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: where are i now ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "68aba3e3-ab34-4602-a06a-64a062e07256",
+    "timestamp": "2025-09-19T08:04:40.832795Z",
+    "tags": [
+      "text",
+      "ws"
+    ],
+    "payload": {
+      "event": {
+        "type": "text",
+        "value": "what it this ",
+        "source": "ws",
+        "timestamp": 1758269080,
+        "metadata": null
+      },
+      "responses": [
+        {
+          "model": "gpt",
+          "text": "GPT reflection on: what it this ",
+          "reasoning": "Emphasizes probabilistic reasoning and human-aligned values.",
+          "confidence": 0.7,
+          "bias_flags": []
+        },
+        {
+          "model": "deepseek",
+          "text": "DeepSeek analytical view: what it this ",
+          "reasoning": "Focuses on deep analysis and alternative trajectories.",
+          "confidence": 0.65,
+          "bias_flags": []
+        },
+        {
+          "model": "gemini",
+          "text": "Gemini multimodal insight: what it this ",
+          "reasoning": "Balances creative exploration with factual grounding.",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "copilot",
+          "text": "Copilot pragmatic answer: what it this ",
+          "reasoning": "Targets actionable steps and developer pragmatics.",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_0",
+          "text": "What if the opposite holds? Re-evaluate: GPT reflection on: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_0",
+          "text": "What if the opposite holds? Re-evaluate: DeepSeek analytical view: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_0",
+          "text": "What if the opposite holds? Re-evaluate: Gemini multimodal insight: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5499999999999999,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_0",
+          "text": "What if the opposite holds? Re-evaluate: Copilot pragmatic answer: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gpt_1",
+          "text": "Consider the opposite holds? Re-evaluate: GPT reflection on: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.6,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_deepseek_1",
+          "text": "Consider the opposite holds? Re-evaluate: DeepSeek analytical view: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.55,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_gemini_1",
+          "text": "Consider the opposite holds? Re-evaluate: Gemini multimodal insight: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.5,
+          "bias_flags": []
+        },
+        {
+          "model": "internal_copilot_1",
+          "text": "Consider the opposite holds? Re-evaluate: Copilot pragmatic answer: what it this ",
+          "reasoning": "Self-generated monologic challenge",
+          "confidence": 0.45000000000000007,
+          "bias_flags": []
+        }
+      ]
+    }
+  }
+]
